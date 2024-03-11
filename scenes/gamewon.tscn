@@ -1,0 +1,73 @@
+[gd_scene load_steps=6 format=3 uid="uid://bgvgciwqxc2s"]
+
+[ext_resource type="Script" path="res://scripts/gamewon.gd" id="1_txd4a"]
+[ext_resource type="Texture2D" uid="uid://bqlj7bs7j3fvn" path="res://images/spacebackground.jpeg" id="2_q8wx1"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_18llq"]
+font_size = 48
+
+[sub_resource type="LabelSettings" id="LabelSettings_6at0c"]
+font_size = 32
+
+[sub_resource type="LabelSettings" id="LabelSettings_mei1v"]
+font_size = 32
+
+[node name="gamewon" type="Node2D"]
+script = ExtResource("1_txd4a")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="BoxContainer" type="BoxContainer" parent="CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -98.5
+offset_top = -100.0
+offset_right = 98.5
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+vertical = true
+
+[node name="Label" type="Label" parent="CanvasLayer/BoxContainer"]
+layout_mode = 2
+text = "You won"
+label_settings = SubResource("LabelSettings_18llq")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="lastscore" type="Label" parent="CanvasLayer/BoxContainer"]
+layout_mode = 2
+text = "score"
+label_settings = SubResource("LabelSettings_6at0c")
+horizontal_alignment = 1
+
+[node name="highscore" type="Label" parent="CanvasLayer/BoxContainer"]
+layout_mode = 2
+text = "score"
+label_settings = SubResource("LabelSettings_mei1v")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="CanvasLayer/BoxContainer"]
+layout_mode = 2
+text = "Try again"
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+texture_repeat = 3
+position = Vector2(0, 53)
+motion_offset = Vector2(900, 0)
+motion_mirroring = Vector2(3198, 2400)
+
+[node name="Spacebackground" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+texture = ExtResource("2_q8wx1")
+region_enabled = true
+region_rect = Rect2(0, 0, 3198, 2400)
+metadata/_edit_lock_ = true
+
+[connection signal="button_down" from="CanvasLayer/BoxContainer/Button" to="." method="_on_button_button_down"]

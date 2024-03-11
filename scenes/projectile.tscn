@@ -1,0 +1,43 @@
+[gd_scene load_steps=6 format=3 uid="uid://beuu3yyv1vgbf"]
+
+[ext_resource type="Script" path="res://scripts/projectile.gd" id="1_nivms"]
+[ext_resource type="Texture2D" uid="uid://5cp3lswc8y7v" path="res://images/yellow beam.png" id="2_akmxk"]
+[ext_resource type="AudioStream" uid="uid://bygsg7wdufkov" path="res://sound/boom.wav" id="3_miqjk"]
+[ext_resource type="AudioStream" uid="uid://cxmbg0i0heg40" path="res://sound/pew.wav" id="4_8bpc8"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fswsp"]
+height = 86.0
+
+[node name="projectile" type="Node2D"]
+script = ExtResource("1_nivms")
+speed = 500
+
+[node name="YellowBeam" type="Sprite2D" parent="."]
+position = Vector2(2, 0)
+rotation = 1.56606
+scale = Vector2(0.397235, 0.397235)
+texture = ExtResource("2_akmxk")
+
+[node name="Area2D" type="Area2D" parent="."]
+rotation = 1.58583
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CapsuleShape2D_fswsp")
+
+[node name="boom" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_miqjk")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
+[node name="pew" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_8bpc8")
+
+[node name="front" type="Node2D" parent="."]
+position = Vector2(42, 0)
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

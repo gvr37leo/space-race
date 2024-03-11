@@ -1,0 +1,42 @@
+[gd_scene load_steps=7 format=3 uid="uid://c1i5stwm7ny5i"]
+
+[ext_resource type="Script" path="res://scripts/engine_exhaust.gd" id="1_86dft"]
+[ext_resource type="Texture2D" uid="uid://c7wf4jd5iua18" path="res://images/redstreak.png" id="1_jjtw3"]
+[ext_resource type="Texture2D" uid="uid://cnqil48sqqpux" path="res://images/exhaustfire.png" id="2_qe0y3"]
+[ext_resource type="AudioStream" uid="uid://mf45xrjh3gcn" path="res://sound/rumble.wav" id="4_i06ji"]
+
+[sub_resource type="Curve" id="Curve_4up01"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.745318, 0.387172), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_2i48f"]
+offsets = PackedFloat32Array(0.0167364, 0.715481, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[node name="engineExhaust" type="Node2D"]
+script = ExtResource("1_86dft")
+
+[node name="fire" type="CPUParticles2D" parent="."]
+position = Vector2(-4, -2)
+draw_order = 1
+texture = ExtResource("1_jjtw3")
+direction = Vector2(0, 1)
+spread = 0.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 335.66
+initial_velocity_max = 335.66
+angular_velocity_min = -352.45
+angular_velocity_max = 362.52
+angle_min = -282.0
+angle_max = 261.8
+scale_amount_curve = SubResource("Curve_4up01")
+color_ramp = SubResource("Gradient_2i48f")
+
+[node name="Exhaustfire" type="Sprite2D" parent="."]
+position = Vector2(0, 46)
+scale = Vector2(1.59275, 1.59275)
+texture = ExtResource("2_qe0y3")
+
+[node name="rumble" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_i06ji")
+volume_db = -3.259

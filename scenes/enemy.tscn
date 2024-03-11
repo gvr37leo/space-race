@@ -1,0 +1,58 @@
+[gd_scene load_steps=7 format=3 uid="uid://ny80kmhr8djt"]
+
+[ext_resource type="Script" path="res://scripts/enemy.gd" id="1_be7vc"]
+[ext_resource type="PackedScene" uid="uid://c1i5stwm7ny5i" path="res://scenes/engine_exhaust.tscn" id="2_rd8m5"]
+[ext_resource type="Texture2D" uid="uid://bpnjylkvft2ug" path="res://images/enemy probe.png" id="3_rd7d2"]
+[ext_resource type="Texture2D" uid="uid://78sfs3fnphlv" path="res://images/reddot.png" id="4_mhnmq"]
+
+[sub_resource type="Curve" id="Curve_13cjv"]
+min_value = 1.0
+max_value = 2.0
+_data = [Vector2(0, 1.99048), 0.0, 0.0, 0, 0, Vector2(0.5, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1pge5"]
+radius = 92.4446
+
+[node name="enemy" type="CharacterBody2D"]
+position = Vector2(423, 248)
+scale = Vector2(0.638554, 0.638554)
+collision_layer = 2
+collision_mask = 0
+motion_mode = 1
+script = ExtResource("1_be7vc")
+accelrationCurve = SubResource("Curve_13cjv")
+
+[node name="exhaustdown" parent="." instance=ExtResource("2_rd8m5")]
+position = Vector2(-12.6632, 144.361)
+scale = Vector2(0.5, 0.5)
+
+[node name="exhaustleft" parent="." instance=ExtResource("2_rd8m5")]
+position = Vector2(-144.361, -1.66893e-06)
+rotation = 1.54874
+scale = Vector2(0.5, 0.5)
+
+[node name="exhaustup" parent="." instance=ExtResource("2_rd8m5")]
+position = Vector2(5.0653, -151.959)
+rotation = 3.09205
+scale = Vector2(0.5, 0.5)
+
+[node name="exhaustright" parent="." instance=ExtResource("2_rd8m5")]
+position = Vector2(154.491, 17.7286)
+rotation = -1.47718
+scale = Vector2(0.5, 0.5)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_1pge5")
+
+[node name="EnemyProbe" type="Sprite2D" parent="."]
+position = Vector2(13, 2)
+texture = ExtResource("3_rd7d2")
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="marker" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(690.623, 32.8868)
+texture = ExtResource("4_mhnmq")
